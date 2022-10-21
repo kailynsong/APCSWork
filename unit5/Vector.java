@@ -35,6 +35,7 @@ public class Vector{
     else if(x > 0 && y < 0){
       quadrant = 4;
     }
+    
     double angle = Math.atan2(y,x);
       angle = angle*180/Math.PI;
       if(quadrant == 1){
