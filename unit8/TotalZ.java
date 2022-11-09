@@ -28,9 +28,15 @@ public class TotalZ{
     names.add("zero");
     names.add("zippy");
 
+    ArrayList<String> names1 = new ArrayList<String>();
+    names1.add("Zuri");
+    names1.add("zoop");
+    names1.add("hi");
+
     System.out.println("Total Length Z Names: " + countZNames(names));
 
     testCountZNames(names, 14.0);
+    testCountZNames(names1, 8.0);
   }
 
 }

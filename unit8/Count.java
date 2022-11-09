@@ -30,9 +30,21 @@ public class Count{
       nums.add(13);
       nums.add(17);
 
+      ArrayList<Integer> nums1 = new ArrayList<Integer>();
+      nums1.add(27);
+      nums1.add(7);
+      nums1.add(17);
+
+      ArrayList<Integer> nums2 = new ArrayList<Integer>();
+      nums2.add(1);
+      nums2.add(18);
+      nums2.add(7);
+
       System.out.println("lucky nums: " + countLucky(nums));
 
       testCountLucky(nums, 2);
+      testCountLucky(nums1, 3);
+      testCountLucky(nums2, 1);
     }
 
 }

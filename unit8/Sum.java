@@ -27,9 +27,19 @@ public class Sum{
     nums.add(2.0);
     nums.add(3.0);
 
+    ArrayList<Double> nums1 = new ArrayList<Double>();
+    nums1.add(2.0);
+    nums1.add(2.0);
+    nums1.add(3.0);
+
+    ArrayList<Double> nums2 = new ArrayList<Double>();
+    nums2.add(0);
+
     System.out.println("Sum of squares is: " + sumOfSquares(nums));
 
     testSumOfSquares(nums, 14.0);
+    testSumOfSquares(nums1, 12.0);
+    testSumOfSquares(nums2, 0.0);
   }
 
 }
