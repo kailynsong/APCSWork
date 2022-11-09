@@ -2,6 +2,15 @@ import java.util.*;
 
 public class TotalZ{
 
+  public static void testCountZNames(ArrayList<String> names, int expected){
+    System.out.println("ArrayList: " + names + " expected: " + expected);
+    if(countZNames(names) == expected){
+      System.out.println("Woohoo!");
+    }else{
+      System.out.println("Boohoo!");
+    }
+  }
+
   public static int countZNames(ArrayList<String> names){
     int total = 0;
 
@@ -21,6 +30,7 @@ public class TotalZ{
 
     System.out.println("Total Length Z Names: " + countZNames(names));
 
+    testCountZNames(names, 14.0);
   }
 
 }

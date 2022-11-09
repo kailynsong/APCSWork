@@ -3,6 +3,15 @@ import java.util.*;
 
 public class Count{
 
+  public static void testCountLucky(ArrayList<Integer> nums, int expected){
+    System.out.println("ArrayList: " + nums + " expected: " + expected);
+    if(countLucky(nums) == expected){
+      System.out.println("Woohoo!");
+    }else{
+      System.out.println("Boohoo!");
+    }
+  }
+
   public static int countLucky(ArrayList<Integer> nums){
     int total = 0;
 
@@ -22,6 +31,8 @@ public class Count{
       nums.add(17);
 
       System.out.println("lucky nums: " + countLucky(nums));
+
+      testCountLucky(nums, 2);
     }
 
 }
