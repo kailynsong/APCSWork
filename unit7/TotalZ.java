@@ -1,6 +1,15 @@
 
 public class TotalZ{
 
+public static void testCountZNames(String[] a, int expected){
+  System.out.println("expected outcome: " + expected);
+  if(countZNames(a) == expected){
+    System.out.println("Woohoo!");
+  }else{
+    System.out.println("Boohoo!");
+  }
+}
+
 public static int countZNames(String[] a){
   int total = 0;
   for(int i = 0; i < a.length; i++){
@@ -13,7 +22,12 @@ public static int countZNames(String[] a){
 
 public static void main(String[] args){
   String[] a = {"Zorro", "zero", "zippy"};
-  System.out.println("Sum of Z names: " + countZNames(a));
+  String[] b = {"Zuri", "hi", "zoo"};
+  System.out.println("Sum of Z names of array a: " + countZNames(a));
+  System.out.println("Sum of Z names of array b: " + countZNames(b));
+
+  testCountZNames(a, 14);
+  testCountZNames(b, 7);
 }
 
 }

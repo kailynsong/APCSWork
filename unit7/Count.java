@@ -2,6 +2,15 @@ import java.util.Arrays;
 
 public class Count{
 
+  public static void testCountLucky(int[] a, int expected){
+    System.out.println("expected: " + expected);
+    if(countLucky(a) == expected){
+      System.out.println("Woohoo!");
+    }else{
+      System.out.println("Boohoo!");
+    }
+  }
+
   public static int countLucky(int[] a){
     int total = 0;
 
@@ -15,7 +24,12 @@ public class Count{
 
   public static void main(String[] args){
     int[] a = {1,4,7,17};
-    System.out.println("Lucky #s: " + countLucky(a));
+    int[] b = {7,13,17};
+    System.out.println("Lucky #s array a: " + countLucky(a));
+    System.out.println("Lucky #s array b: " + countLucky(b));
+
+    testCountLucky(a, 2);
+    testCountLucky(b, 2);
   }
 
 }
