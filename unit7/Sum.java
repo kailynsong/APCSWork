@@ -20,6 +20,12 @@ public class Sum{
 
   public static void main(String[] args){
     double[] a = {1.0,2.0,3.0};
+
+    System.out.println("Array a: ");
+    for(int i = 0; i < a.length; i++){
+      System.out.println(a[i]);
+    }
+
     System.out.println("Sum of squares: " + sumOfSquares(a));
 
     testSumOfSquares(a, 14);

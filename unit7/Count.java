@@ -25,6 +25,15 @@ public class Count{
   public static void main(String[] args){
     int[] a = {1,4,7,17};
     int[] b = {7,13,17};
+
+    System.out.println("Array a: ");
+    for(int i = 0; i < a.length; i++){
+      System.out.println(a[i]);
+    }
+    System.out.println("Array b: ");
+    for(int i = 0; i < b.length; i++){
+      System.out.println(b[i]);
+    }
     System.out.println("Lucky #s array a: " + countLucky(a));
     System.out.println("Lucky #s array b: " + countLucky(b));
 

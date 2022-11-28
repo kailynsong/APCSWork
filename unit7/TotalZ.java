@@ -23,9 +23,27 @@ public static int countZNames(String[] a){
 public static void main(String[] args){
   String[] a = {"Zorro", "zero", "zippy"};
   String[] b = {"Zuri", "hi", "zoo"};
+
+//naming arrays
+  System.out.println("Array a: ");
+  for(int i = 0; i < a.length; i++){
+    System.out.println(a[i]);
+  }
+
+  System.out.println();
+
+  System.out.println("Array b: ");
+  for(int i = 0; i < b.length; i ++){
+    System.out.println(b[i]);
+  }
+
+  System.out.println();
+  
+  //printing out results
   System.out.println("Sum of Z names of array a: " + countZNames(a));
   System.out.println("Sum of Z names of array b: " + countZNames(b));
 
+//unit tests
   testCountZNames(a, 14);
   testCountZNames(b, 7);
 }
