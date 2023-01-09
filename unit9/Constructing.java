@@ -8,11 +8,13 @@ public class Constructing{
     int b = 1;
     result.add(a);
     result.add(b);
+
     for(int i = 1; i < n-1; i ++){
       result.add(a+b);
       b = a+b;
       a = b-a;
     }
+    
     return result;
   }
 

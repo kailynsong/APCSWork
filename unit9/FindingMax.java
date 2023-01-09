@@ -19,7 +19,6 @@ public class FindingMax{
       if(inputs > result)
         result = inputs;
     }
-
     return result;
   }
 

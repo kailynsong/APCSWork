@@ -1,0 +1,6 @@
+
+/*
+project ideas:
+- pacman
+
+*/

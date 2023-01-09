@@ -7,12 +7,10 @@ public class Filter{
     ArrayList<Integer> scores = new ArrayList<Integer>();
 
     for(int inputs: input){
-      if(inputs > 90)
+      if(inputs >= 90)
       scores.add(inputs);
     }
-
     return scores;
-
   }
 
   public static void main(String[] args){
