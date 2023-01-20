@@ -13,10 +13,19 @@ public class Point{
     this.color = color;
   }
 
+  public boolean addPoint(int tempx,int tempy){
+    if(tempx > x-r/2 && tempx < x+r+r/2 && tempy > y-r/2 && tempy < y+r+r/2){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
   public void display(){
     p.fill(color);
     p.ellipse(x, y, r, r);
 
   }
+}
 
 }
