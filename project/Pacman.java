@@ -10,6 +10,7 @@ public class Pacman extends PApplet{
   int x, y, d, gridsize, vx, vy, points;
   PImage ch;
   ArrayList<Wall> walls;
+  ArrayList<Point> dots;
   Wall top, bottom,right,left,a,b,c,e,f,g,h;
   PFont title;
 
@@ -22,7 +23,7 @@ public void setup() {
   //initializing
   vx = 0;
   x = width/2;
-  y = height/2;
+  y = height/2+height/5;
   d = 20;
   gridsize = 600;
   gameState = "START";
@@ -31,110 +32,12 @@ public void setup() {
 
   pacman = loadImage("pacman.png");
 
-//  point = new ArrayList<Point>();
+  dots = new ArrayList<Point>();
 
-//horizontal walls
-  walls = new ArrayList<Wall>();
-  for(int i = 0; i <= 30; i++){
-    top = new Wall(this,0+20*i,0,20,20);
-    walls.add(top);
-}
-  for(int i = 0; i<=30; i++){
-    bottom = new Wall(this,0+20*i,580,20,20);
-    walls.add(bottom);
-  }
+ Point p = new Point(this,300,200,10);
+ dots.add(p);
 
-//vertical walls (outer)
-  for(int i = 0; i < 10; i++){
-    right = new Wall(this,580,0+20*i,20,20);
-    walls.add(right);
-  }
-
-  for(int i = 0; i < 10; i++){
-    left = new Wall(this,0,0+20*i,20,20);
-    walls.add(left);
-  }
-
-//outer horizontal walls
-  //left
-  for(int i = 0; i < 5; i++){
-    a = new Wall(this,0+20*i,180,20,20);
-    walls.add(a);
-  }
-  //right
-  for(int i = 0; i < 5; i++){
-    a = new Wall(this,580-20*i,180,20,20);
-    walls.add(a);
-  }
-  //middleLEFT
-  for(int i = 0; i < 5; i++){
-  b = new Wall(this,80-20*i,240,20,20);
-  walls.add(b);
-}
-  //middle RIGHT
-  for(int i = 0; i < 5; i++){
-  b = new Wall(this,500+20*i,240,20,20);
-  walls.add(b);
-}
-
-  //bottom left
-  for(int i = 0; i < 5; i++){
-  c = new Wall(this,0+20*i,300,20,20);
-  walls.add(c);
-}
-  //bottom right
-  for(int i = 0; i < 5; i++){
-    c = new Wall(this,500+20*i,300,20,20);
-    walls.add(c);
-}
-
-  //bottomest left
-  for(int i = 0; i < 5; i++){
-    g = new Wall(this,80-20*i,360,20,20);
-    walls.add(g);
-  }
-  //bottomest right
-  for(int i = 0; i < 5; i++){
-    g = new Wall(this,500+20*i,360,20,20);
-    walls.add(g);
-  }
-
-//outer vertical walls
-  //top left
-  for(int i = 0; i < 4; i++){
-  e = new Wall(this,80,180+20*i,20,20);
-  walls.add(e);
-}
-  //top right
-  for(int i = 0; i < 4; i++){
-  e = new Wall(this,500,180+20*i,20,20);
-  walls.add(e);
-}
-
-  //middle left
-  for(int i = 0; i < 4; i++){
-  f = new Wall(this,80,300+20*i,20,20);
-  walls.add(f);
-}
-
-  //middle right
-  for(int i = 0; i < 4; i++){
-  f = new Wall(this,500,300+20*i,20,20);
-  walls.add(f);
-}
-
-  //bottom left
-  for(int i = 0; i < 11; i++){
-    right = new Wall(this,0,360+20*i,20,20);
-    walls.add(right);
-  }
-  //bottom right
-  for(int i = 0; i < 11; i++){
-    right = new Wall(this,580,360+20*i,20,20);
-    walls.add(right);
-  }
-
-
+ outsideWalls();
   //title initialization
   title = createFont("upheavtt.ttf", 60);
 
@@ -163,6 +66,137 @@ public void draw() {
     drawEnd();
   }
 
+}
+
+public void outsideWalls1(){
+  //horizontal walls
+    walls = new ArrayList<Wall>();
+    for(int i = 0; i <= 30; i++){
+      top = new Wall(this,0+20*i,0,20,20);
+      walls.add(top);
+  }
+    for(int i = 0; i<=30; i++){
+      bottom = new Wall(this,0+20*i,580,20,20);
+      walls.add(bottom);
+    }
+
+  //vertical walls (outer)
+    for(int i = 0; i < 10; i++){
+      right = new Wall(this,580,0+20*i,20,20);
+      walls.add(right);
+    }
+
+    for(int i = 0; i < 10; i++){
+      left = new Wall(this,0,0+20*i,20,20);
+      walls.add(left);
+    }
+
+  //outer horizontal walls
+    //left
+    for(int i = 0; i < 5; i++){
+      a = new Wall(this,0+20*i,180,20,20);
+      walls.add(a);
+    }
+    //right
+    for(int i = 0; i < 5; i++){
+      a = new Wall(this,580-20*i,180,20,20);
+      walls.add(a);
+    }
+    //middleLEFT
+    for(int i = 0; i < 5; i++){
+    b = new Wall(this,80-20*i,240,20,20);
+    walls.add(b);
+  }
+    //middle RIGHT
+    for(int i = 0; i < 5; i++){
+    b = new Wall(this,500+20*i,240,20,20);
+    walls.add(b);
+  }
+
+    //bottom left
+    for(int i = 0; i < 5; i++){
+    c = new Wall(this,0+20*i,300,20,20);
+    walls.add(c);
+  }
+    //bottom right
+    for(int i = 0; i < 5; i++){
+      c = new Wall(this,500+20*i,300,20,20);
+      walls.add(c);
+  }
+
+    //bottomest left
+    for(int i = 0; i < 5; i++){
+      g = new Wall(this,80-20*i,360,20,20);
+      walls.add(g);
+    }
+    //bottomest right
+    for(int i = 0; i < 5; i++){
+      g = new Wall(this,500+20*i,360,20,20);
+      walls.add(g);
+    }
+
+  //outer vertical walls
+    //top left
+    for(int i = 0; i < 4; i++){
+    e = new Wall(this,80,180+20*i,20,20);
+    walls.add(e);
+  }
+    //top right
+    for(int i = 0; i < 4; i++){
+    e = new Wall(this,500,180+20*i,20,20);
+    walls.add(e);
+  }
+
+    //middle left
+    for(int i = 0; i < 4; i++){
+    f = new Wall(this,80,300+20*i,20,20);
+    walls.add(f);
+  }
+
+    //middle right
+    for(int i = 0; i < 4; i++){
+    f = new Wall(this,500,300+20*i,20,20);
+    walls.add(f);
+  }
+
+    //bottom left
+    for(int i = 0; i < 11; i++){
+      right = new Wall(this,0,360+20*i,20,20);
+      walls.add(right);
+    }
+    //bottom right
+    for(int i = 0; i < 11; i++){
+      right = new Wall(this,580,360+20*i,20,20);
+      walls.add(right);
+    }
+
+    //ghost walls:
+      //horizontal
+    for(int i = 0; i < 8; i++){
+      g = new Wall(this,220 + 20*i,320,20,20);
+      walls.add(g);
+    }
+
+    for(int i = 0; i < 3; i++){
+      g = new Wall(this,220 + 20*i, 270,20,20);
+      walls.add(g);
+    }
+
+    for(int i = 0; i < 3; i++){
+      g = new Wall(this,360 + 20*i, 270,20,20);
+      walls.add(g);
+    }
+
+    //vertical ghost holder walls:
+    for(int i = 0; i < 3; i++){
+      g = new Wall(this,220,270+ 20*i,20,20);
+      walls.add(g);
+    }
+
+    for(int i = 0; i < 4; i++){
+      g = new Wall(this,400,260 + 20*i,20,20);
+      walls.add(g);
+    }
 }
 
 
@@ -210,6 +244,14 @@ public void drawGame() {
       vy = 0;
   }
 }
+
+  for(Point a : dots){
+    a.display();
+    if(a.addPoint(tempx,tempy) == true){
+      a.x = 2000;
+      a.y = 2000;
+    }
+  }
 /*
 point = 100;
 for(Point p : points){
@@ -280,20 +322,20 @@ public void keyPressed(){
     if(gameState == "GAME"){
       if(keyCode == RIGHT){
         angle = PI;
-        vx = 2;
+        vx = 3;
         vy = 0;
       }if (keyCode == LEFT){
         angle = 0;
         vy = 0;
-        vx = -2;
+        vx = -3;
       }if (keyCode == UP){
         angle = PI/2;
         vx = 0;
-        vy = -2;
+        vy = -3;
       }if (keyCode == DOWN){
         angle = 3*PI/2;
         vx = 0;
-        vy = 2;
+        vy = 3;
       }
   }
 

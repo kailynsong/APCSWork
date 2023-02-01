@@ -3,14 +3,13 @@ import processing.core.*;
 
 public class Point{
   private PApplet p;
-  private int x, y, r, color;
+  int x, y, r;
 
-  public Point(PApplet p, int x, int y, int r, int color){
+  public Point(PApplet p, int x, int y, int r){
     this.p = p;
     this.x = x;
     this.y = y;
     this.r = r;
-    this.color = color;
   }
 
   public boolean addPoint(int tempx,int tempy){
@@ -22,10 +21,8 @@ public class Point{
   }
 
   public void display(){
-    p.fill(color);
+    p.fill(254,255,121);
     p.ellipse(x, y, r, r);
 
   }
-}
-
 }
