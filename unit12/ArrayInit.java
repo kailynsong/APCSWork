@@ -43,8 +43,8 @@ public class ArrayInit{
     int b = 5;
     double[][] nums = new double[b][b];
 
-    for(int i = 0; i < 5; i++){
-      for(int j = 0; i < 5; j++){
+    for(int i = 0; i < b; i++){
+      for(int j = 0; i < b; j++){
         if(i == j){
           nums[i][j] = i*11;
         }
