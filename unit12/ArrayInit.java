@@ -4,11 +4,11 @@ public class ArrayInit{
   public static void main(String[] args){
 
     //PART A
-      int n = 10;
-      int[][] cells = new int[n][n];
+      int c = 10;
+      int[][] cells = new int[c][c];
 
-      for(int i = 0; i < n; i++){
-        for(int j = 0; j < n; j++){
+      for(int i = 0; i < c; i++){
+        for(int j = 0; j < c; j++){
           if(i == j){
             cells[i][j] = 1;
           }else{
@@ -23,6 +23,8 @@ public class ArrayInit{
       }
       System.out.println();
     }
+
+    System.out.println();
 
     //PART B
     int a = 2;
@@ -39,23 +41,40 @@ public class ArrayInit{
         System.out.println();
     }
 
+    System.out.println();
+
     //PART C
     int b = 5;
     double[][] nums = new double[b][b];
 
     for(int i = 0; i < b; i++){
-      for(int j = 0; i < b; j++){
-        if(i == j){
-          nums[i][j] = i*11;
-        }
+      for(int j = 0; j < b; j++){
+          nums[i][j] = i*10+11+j;
       }
     }
 
     for(double[] row : nums){
       for(double num : row){
         System.out.print(num + " ");
-        System.out.println();
       }
+      System.out.println();
+    }
+
+    System.out.println();
+
+    //PART D
+    double[][] n = new double[6][5];
+    for(int i = 0; i < 6; i ++){
+      for(int j = 0; j < 5; j ++){
+        n[i][j] = i+1;
+      }
+    }
+
+    for(double[] row : n){
+      for(double number : row){
+        System.out.print(number + " ");
+      }
+      System.out.println();
     }
 
 }
