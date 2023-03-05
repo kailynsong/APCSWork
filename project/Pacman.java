@@ -8,9 +8,10 @@ public class Pacman extends PApplet{
   PImage pacman;
   float angle;
   int x, y, d, gridsize, vx, vy, points;
-  PImage ch;
+  PImage ch, pinkright, pinkleft;
   ArrayList<Wall> walls;
   ArrayList<Point> dots;
+  ArrayList<Ghost> ghosts;
   Wall top, bottom,right,left,a,b,c,e,f,g,h;
   PFont title;
 
@@ -31,13 +32,15 @@ public void setup() {
   background(bgcolor);
 
   pacman = loadImage("pacman.png");
+  pinkright = loadImage("pinkright.png");
+  pinkleft = loadImage("pinkleft.png");
 
   dots = new ArrayList<Point>();
+  ghosts = new ArrayList<Ghost>();
 
  Point p = new Point(this,300,200,10);
  dots.add(p);
 
- outsideWalls();
   //title initialization
   title = createFont("upheavtt.ttf", 60);
 
@@ -67,6 +70,7 @@ public void draw() {
   }
 
 }
+    
 
 public void outsideWalls1(){
   //horizontal walls
@@ -199,6 +203,14 @@ public void outsideWalls1(){
     }
 }
 
+//maybe make a function that creates the for loops for my walls
+    
+
+public void createGhost(PImage gh1, PImage gh2){
+    Ghost gh = new Ghost(this,x,y,20, vx, pinkleft, pinkright);
+    ghosts.add(gh);
+}
+
 
 public void character(int x, int y, float angle){
   pushMatrix();
@@ -224,6 +236,7 @@ public void drawStart() {
 }
 
 public void drawGame() {
+  outsideWalls1();
 
   background(bgcolor);
   //updating character movement
@@ -236,6 +249,8 @@ public void drawGame() {
   int tempy = y+vy;
 
   character(x,y,angle);
+    
+createGhost(pinkright, pinkleft);
 
   for(Wall w : walls){
     w.display();
@@ -251,7 +266,17 @@ public void drawGame() {
       a.x = 2000;
       a.y = 2000;
     }
+
+  for(Ghost g : ghosts){
+      g.display();
+      if(g.ghostHit(tempx,tempy) == true){
+        //put public function decrease ghost here
+      }
   }
+
+//add extra gamestate in between game and end to make animation
+//keep playing and changes to gamestate end after its done
+
 /*
 point = 100;
 for(Point p : points){
@@ -281,6 +306,7 @@ for(Point p : points){
 
 
 }
+}   
 
 public void drawEnd() {
 
