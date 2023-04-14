@@ -17,6 +17,18 @@ public class Wall{
       return false;
     }
   }
+      
+    public boolean ghostWall(int tempx, int tempy){
+    if(tempx > x-10 && tempx < x+30 && tempy > y-10 && tempy < y+30){
+      return true;
+    }else{
+      return false;
+    } 
+  }
+    
+    public int WgetX(){return x;}
+    
+    public int WgetY(){return y;}
 
   public void display(){
     p.noStroke();

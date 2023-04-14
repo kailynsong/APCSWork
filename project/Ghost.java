@@ -2,55 +2,73 @@ import processing.core.*;
 
 public class Ghost{
     
-  private int x,y,d,vx;
+  public int gx,gy;
+  public int ghvx, ghvy;
   private PApplet p;
   PImage gh, gh1, gh2;
    
-  public Ghost(PApplet p, int xIn, int yIn, int vxIn, int dIn, PImage gh1In, PImage gh2In){
+  public Ghost(PApplet p, int gxIn, int gyIn, int ghvx, int ghvy, PImage gh1In, PImage gh2In){
     this.p = p;
-    this.x = xIn;
-    this.y = yIn;
-    this.d = dIn;
-    this.vx = vxIn;
+    this.gx = gxIn;
+    this.gy = gyIn;
+    this.ghvx = ghvx;
+    this.ghvy = ghvy;
     this.gh1 = gh1In;
     this.gh2 = gh2In;
     this.gh = gh;
       
-    if(vx > 0){
+    if(ghvx > 0){
         gh = gh1;
-    }else if(vx < 0){
+    }else if(ghvx < 0){
         gh = gh2;
      }
   }
     
+    public int getGhostX(){ return gx;}
+    public int getGhostY(){ return gy;}
+    public int getghvx(){ return ghvx;}
+    
     public void decreaseGhost(){
         //make the if statement to see if d > .1 and decrease the ghost 
+        
     }
-    
+    //make ghost turn right if hits a wall
     
     public void changeImage(){
-        if(vx > 0){
+        if(ghvx > 0){
                 gh = gh1;
-            }else if(vx < 0){
+            }else if(ghvx < 0){
                 gh = gh2;
             }
     }
 
   public boolean ghostHit(int tempx, int tempy){
-    if(tempx > x-d/2 && tempx < x+d+d/2 && tempy > y-d/2 && tempy < y+d+d/2){
+    if(tempx > gx-10 && tempx < gx+30 && tempy > gy-10 && tempy < gy+30){
       return true;
     }else{
       return false;
     }
 }
+    
+    public boolean ghostWall(int tempx, int tempy){
+    if(tempx > gx-10 && tempx < gx+30 && tempy > gy-10 && tempy < gy+30){
+      return true;
+    }else{
+      return false;
+    }
+  }
+    
+  public void update(){
+      gx+=ghvx;
+  }
+    
   public void display(){
-    p.ellipse(x,y,d,d);
-    p.fill(229,204,255);
     p.pushMatrix();
-    p.translate(x,y);
-    p.image(gh, 0, 0);
-    gh.resize(d,d);
+    p.translate(gx,gy);
+    p.image(this.gh1,0,0);
+    gh1.resize(20,20);
     p.popMatrix();
+      
   }
 
   /*if the character is hit by the ghost, make it that it gets smaller

@@ -8,25 +8,48 @@ public class Pacman extends PApplet{
   PImage pacman;
   float angle;
   int x, y, d, gridsize, vx, vy, points;
-  PImage ch, pinkright, pinkleft;
+  PImage ch, pinkright, pinkleft, blueright, blueleft;
   ArrayList<Wall> walls;
   ArrayList<Point> dots;
   ArrayList<Ghost> ghosts;
   Wall top, bottom,right,left,a,b,c,e,f,g,h;
   PFont title;
+    
+  //level 1 grid
+  int[][] grid = {{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},//1st row
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,0,1,1,1,1,1,0,1,1,0,1,0,1,1,1,1,1,0,1},
+                 {1,0,0,0,0,0,1,0,1,0,0,1,0,1,0,0,0,0,0,1},
+                 {1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1},
+                 {0,0,0,0,1,0,1,1,1,0,1,1,0,1,0,1,0,0,0,0},
+                 {1,1,1,1,1,0,0,0,0,0,0,0,0,1,0,1,1,1,1,1},
+                 {1,0,0,0,0,0,1,1,0,1,1,1,0,1,0,0,0,0,0,1},
+                 {1,0,1,1,1,1,1,0,0,0,0,1,0,1,1,1,1,1,0,1},
+                 {0,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0}, //half way
+                 {1,0,1,1,1,1,1,1,1,0,0,0,0,1,1,1,1,1,0,1},
+                 {1,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1},
+                 {1,1,1,1,1,0,1,1,1,1,1,1,0,0,0,1,1,1,1,1},
+                 {0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0},
+                 {1,1,1,1,1,0,1,1,1,1,1,0,1,1,0,1,1,1,1,1},
+                 {1,0,0,0,0,0,0,0,0,0,1,0,1,1,0,0,0,0,0,1},
+                 {1,0,1,1,1,1,1,1,1,0,1,0,1,1,0,1,1,1,0,1},
+                 {1,0,1,1,1,1,1,1,1,0,1,0,1,1,0,1,1,1,0,1},
+                 {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+                 {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}}; //last row
 
-  public void settings() {
+  
+public void settings(){
+    
     size(600,600);
-  //fullScreen();
 }
 
 public void setup() {
   //initializing
   vx = 0;
   x = width/2;
-  y = height/2+height/5;
+  y = height/3;
   d = 20;
-  gridsize = 600;
+  gridsize = 400;
   gameState = "START";
   angle = 0;
   background(bgcolor);
@@ -34,12 +57,17 @@ public void setup() {
   pacman = loadImage("pacman.png");
   pinkright = loadImage("pinkright.png");
   pinkleft = loadImage("pinkleft.png");
+  blueright = loadImage("blueright.png");
+  blueleft = loadImage("blueleft.png");
 
   dots = new ArrayList<Point>();
   ghosts = new ArrayList<Ghost>();
+createGhost(pinkright, pinkleft);
 
  Point p = new Point(this,300,200,10);
  dots.add(p);
+    
+createWalls();
 
   //title initialization
   title = createFont("upheavtt.ttf", 60);
@@ -54,7 +82,23 @@ public void setup() {
 
   }
   */
+    
 }
+    
+public void createWalls(){
+    walls = new ArrayList<Wall>();
+    
+        for(int i = 0; i < grid.length; i++){
+            for(int j = 0; j < grid[i].length; j++){
+                if(grid[i][j] == 1){
+                    int wallWidth = width/20;
+                    Wall w = new Wall(this, j*wallWidth, i*wallWidth, wallWidth, wallWidth);
+                    walls.add(w);
+                }
+            }
+        }
+        
+    }
 
 private int bgcolor = 0;
 
@@ -71,57 +115,55 @@ public void draw() {
 
 }
     
-
+/*
 public void outsideWalls1(){
   //horizontal walls
     walls = new ArrayList<Wall>();
-    for(int i = 0; i <= 30; i++){
+    for(int i = 0; i <= width/20; i++){
       top = new Wall(this,0+20*i,0,20,20);
       walls.add(top);
   }
-    for(int i = 0; i<=30; i++){
-      bottom = new Wall(this,0+20*i,580,20,20);
+    for(int i = 0; i<=width/20; i++){
+      bottom = new Wall(this,0+20*i,height-20,20,20);
       walls.add(bottom);
     }
 
   //vertical walls (outer)
-    for(int i = 0; i < 10; i++){
-      right = new Wall(this,580,0+20*i,20,20);
+    for(int i = 0; i < width/90; i++){
+      right = new Wall(this,width-20,0+20*i,20,20);
       walls.add(right);
     }
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < width/90; i++){
       left = new Wall(this,0,0+20*i,20,20);
       walls.add(left);
     }
 
   //outer horizontal walls
-    //left
-    for(int i = 0; i < 5; i++){
-      a = new Wall(this,0+20*i,180,20,20);
+    //up left
+    for(int i = 0; i < width/120; i++){
+      a = new Wall(this,0+20*i,height/3,20,20);
       walls.add(a);
     }
-    //right
-    for(int i = 0; i < 5; i++){
-      a = new Wall(this,580-20*i,180,20,20);
+    //up right
+    for(int i = 0; i < width/120; i++){
+      a = new Wall(this,(width-20)-20*i,height/3,20,20);
       walls.add(a);
     }
     //middleLEFT
-    for(int i = 0; i < 5; i++){
-    b = new Wall(this,80-20*i,240,20,20);
+    for(int i = 0; i < width/120; i++){
+    b = new Wall(this,20*width/120-20*i,(height/3)+20*width/320,20,20);
     walls.add(b);
   }
-    //middle RIGHT
-    for(int i = 0; i < 5; i++){
-    b = new Wall(this,500+20*i,240,20,20);
-    walls.add(b);
-  }
+    
+    
 
     //bottom left
     for(int i = 0; i < 5; i++){
     c = new Wall(this,0+20*i,300,20,20);
     walls.add(c);
   }
+    
     //bottom right
     for(int i = 0; i < 5; i++){
       c = new Wall(this,500+20*i,300,20,20);
@@ -141,19 +183,21 @@ public void outsideWalls1(){
 
   //outer vertical walls
     //top left
-    for(int i = 0; i < 4; i++){
-    e = new Wall(this,80,180+20*i,20,20);
+    for(int i = 0; i < width/280; i++){
+    e = new Wall(this,20*width/120,(height/3)+20*i,20,20);
     walls.add(e);
   }
+    
+    //USE THIS FOR STUCK QUESTION
     //top right
-    for(int i = 0; i < 4; i++){
-    e = new Wall(this,500,180+20*i,20,20);
+    for(int i = 0; i < width/280; i++){
+    e = new Wall(this,500,height/2+20*i,20,20);
     walls.add(e);
   }
 
     //middle left
     for(int i = 0; i < 4; i++){
-    f = new Wall(this,80,300+20*i,20,20);
+    f = new Wall(this,(width-20)-20*width/120,height/3+20*i,20,20);
     walls.add(f);
   }
 
@@ -202,13 +246,16 @@ public void outsideWalls1(){
       walls.add(g);
     }
 }
+*/
 
 //maybe make a function that creates the for loops for my walls
     
 
 public void createGhost(PImage gh1, PImage gh2){
-    Ghost gh = new Ghost(this,x,y,20, vx, pinkleft, pinkright);
-    ghosts.add(gh);
+    Ghost pinkgh = new Ghost(this,300,100, 2, 0, pinkleft, pinkright);
+    ghosts.add(pinkgh);
+    Ghost bluegh = new Ghost(this, 300, 140, -2, 0, blueleft, blueright);
+    ghosts.add(bluegh);
 }
 
 
@@ -234,9 +281,10 @@ public void drawStart() {
   //maybe add ghosts circling around the title screen
 
 }
+    
 
 public void drawGame() {
-  outsideWalls1();
+  //outsideWalls1();
 
   background(bgcolor);
   //updating character movement
@@ -249,16 +297,24 @@ public void drawGame() {
   int tempy = y+vy;
 
   character(x,y,angle);
-    
-createGhost(pinkright, pinkleft);
 
-  for(Wall w : walls){
+  for(Ghost g : ghosts){
+    for(Wall w : walls){
     w.display();
     if(w.isInside(tempx,tempy) == true){
       vx = 0;
       vy = 0;
   }
+      if(w.ghostWall(g.gx,g.gy) == true){
+          g.ghvx=0;
+          pushMatrix();
+          translate(g.gx,g.gy);
+          rotate(PI/2);
+          popMatrix();
+          g.ghvy=-2;
+      }
 }
+  }
 
   for(Point a : dots){
     a.display();
@@ -269,10 +325,14 @@ createGhost(pinkright, pinkleft);
 
   for(Ghost g : ghosts){
       g.display();
+      g.update();
+      g.ghostWall(tempx,tempy);
       if(g.ghostHit(tempx,tempy) == true){
         //put public function decrease ghost here
       }
+      
   }
+  
 
 //add extra gamestate in between game and end to make animation
 //keep playing and changes to gamestate end after its done
