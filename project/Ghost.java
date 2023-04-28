@@ -28,6 +28,18 @@ public class Ghost{
     public int getGhostY(){ return gy;}
     public int getghvx(){ return ghvx;}
     
+    public void bounce(){
+    if (gx > 590 || gx < 0) {
+        ghvx = -ghvx;
+  }
+
+  if (gy > 590 || gy < 0) {
+        ghvy = -ghvy;
+  }  
+        gx += ghvx;
+        gy += ghvy;
+    }
+    
     public void decreaseGhost(){
         //make the if statement to see if d > .1 and decrease the ghost 
         
