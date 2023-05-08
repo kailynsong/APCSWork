@@ -158,6 +158,9 @@ public void createPoints(){
     }
 
 }
+    
+
+    
    /* 
 public void createPoints2(){
     dots = new ArrayList<Point>();
@@ -180,7 +183,10 @@ public void draw() {
 
   if (gameState == "START") {
     drawStart();
-  } else if (gameState == "GAME") {
+  } else if(gameState == "RULES"){
+      drawRules();
+  }
+    else if (gameState == "GAME") {
     drawGame();
   } else if (gameState == "END") {
     drawEnd();
@@ -217,8 +223,6 @@ public void drawStart() {
   fill(255);
   text("PACMAN", width/2, height/2);
   textFont(small);
-  text("PRESS ENTER TO BEGIN!", width/2, height/2+50);
-  text("USE THE ARROW KEYS TO MOVE", width/2, height/2+90);
   for(int i =0; i < 40; i++){
   Point p = new Point(this, i*25+width/23,height/2+20, 15);
   Point p1 = new Point(this, i*25+width/23, height/2-50,15);
@@ -259,6 +263,18 @@ public void drawStart() {
         gameState = "END";
 }
 }
+    public void drawRules(){
+        fill(255);
+        textAlign(CENTER);
+        textFont(title);
+        text("HOW TO PLAY:", width/2, height/4-4);
+        text("HOW TO PLAY:", width/2, height/4);
+        textFont(small);
+        text("USE THE ARROW KEYS TO MOVE PACMAN", width/2, height/2-35);
+        text("IF YOU HIT THE GHOST, YOU DIE", width/2, height/2+10);
+        text("PRESS ENTER TO BEGIN!", width/2, height/2+55);
+        text("IT'S JUST LIKE NORMAL PACMAN!!", width/2, height/2+100);
+    }
 
 public void drawGame() {
 
@@ -327,23 +343,28 @@ public void drawEnd() {
   fill(247, 255, 3);
   text("YOU'RE DONE!", width/2, height/2);
   textFont(small);
-  fill(99, 245, 66);
-  text("PLEASE EXIT THIS SCREEN", width/2, height/2+40);
-  text("AND PRESS THE UP ARROW", width/2, height/2+70);
-  text("ON THE BLACK AND GREEN SCREEN", width/2, height/2+100);
-  text("TO START AGAIN!", width/2, height/2+130);
+  fill(0);
+  text("PRESS ENTER TO START AGAIN!", width/2, height/2+37);
+  fill(247,255,3);
+  text("PRESS ENTER TO START AGAIN!", width/2, height/2+35);
 }
 
 public void keyPressed(){
 //gamestates
   if(keyCode == ENTER){
     if(gameState == "START"){
-      gameState = "GAME";
-    }else if(gameState == "GAME"){
+        background(0);
+      gameState = "RULES";
+    }else if(gameState == "RULES"){
+        gameState = "GAME";
+    }
+      else if(gameState == "GAME"){
         gameState = "END";
           x = width/2;
         y = height/2;
+          vx = 0;
     }if(gameState == "END"){ 
+        background(0);
         gameState = "START";
     }
   }
